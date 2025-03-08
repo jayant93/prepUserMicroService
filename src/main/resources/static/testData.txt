@@ -19,3 +19,8 @@
   ]
 }
 
+✔️ Step 1: Implement UserDetailsService (to load users from the database).
+✔️ Step 2: Configure JWT generation and validation.
+✔️ Step 3: Set up Security Configuration (SecurityFilterChain).
+✔️ Step 4: Implement Authentication API (Login & Register endpoints).
+
