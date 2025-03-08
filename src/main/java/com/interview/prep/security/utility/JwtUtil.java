@@ -12,10 +12,14 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private static final String SECRET_KEY = "testjwt";
+    private static final String SECRET_KEY = "your_very_secure_secret_key_with_32_bytes_minimum";
     private static final long EXPIRATION_TIME = 1000 * 60 * 60; //hour
 
-    private final Key key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    private final Key key;
+
+    public JwtUtil() {
+        this.key = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
+    }
 
     //generate Token
     public String generateToken(String username){
@@ -54,7 +58,7 @@ public class JwtUtil {
         return Jwts.parserBuilder()
                 .setSigningKey(key)
                 .build()
-                .parseClaimsJwt(token)
+                .parseClaimsJws(token)
                 .getBody();
     }
 

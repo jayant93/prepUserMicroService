@@ -17,7 +17,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public ResponseEntity addUser(@RequestBody UserRecord user){
         userService.createUser(user);
         return ResponseEntity.ok("User Creation Successfull");
