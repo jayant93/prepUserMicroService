@@ -2,8 +2,14 @@ package com.interview.prep.entities;
 
 import com.interview.prep.utility.AddressType;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Address {
 
     @Id

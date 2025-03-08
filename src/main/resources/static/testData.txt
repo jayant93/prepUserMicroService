@@ -1,0 +1,21 @@
+{
+  "name": "John Doe",
+  "phoneNumber": "9876543210",
+  "password": "Secure@123",
+  "roles": ["ROLE_USER", "ROLE_ADMIN"],
+  "address": [
+    {
+      "addressType": "HOME",
+      "houseNumber": "123A",
+      "Area": "Downtown",
+      "City": "New York"
+    },
+    {
+      "addressType": "OFFICE",
+      "houseNumber": "456B",
+      "Area": "Business Park",
+      "City": "San Francisco"
+    }
+  ]
+}
+

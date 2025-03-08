@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
         user.setName(userRecord.name());
         user.setPhoneNumber(userRecord.phoneNumber());
         user.setPassword(userRecord.password());
+        user.setRoles(userRecord.roles());
 
         try {
             user.setAddress(userRecord.
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
                     stream().
                      map(a -> mapAddresRecordToAddress(a,user))
                     .collect(Collectors.toList()));
+
 
             userRepository.save(user);
 
@@ -74,7 +76,7 @@ public class UserServiceImpl implements UserService {
                                 .stream().map(
                                       a->mapAddresstoAddressRecord(a))
                                     .collect(Collectors.toList()),
-                        user.get().getPhoneNumber(),"");
+                        user.get().getPhoneNumber(),"",user.get().getRoles());
         else {
             throw new UserNotFoundException(String.valueOf(id),false);
         }
@@ -112,7 +114,7 @@ public class UserServiceImpl implements UserService {
                         .stream().map(
                                 a->mapAddresstoAddressRecord(a))
                         .collect(Collectors.toList()),
-                user.getPhoneNumber(),"");
+                user.getPhoneNumber(),"",user.getRoles());
     }
 
     @Override
@@ -159,7 +161,7 @@ public class UserServiceImpl implements UserService {
                             .stream().map(
                                     a->mapAddresstoAddressRecord(a))
                             .collect(Collectors.toList()),
-                    user.get().getPhoneNumber(),"");
+                    user.get().getPhoneNumber(),"",user.get().getRoles());
         else {
             throw new UserNotFoundException(String.valueOf(name),true);
         }
