@@ -10,6 +10,7 @@ import com.interview.prep.records.UserRecord;
 import com.interview.prep.repositories.UserRepository;
 import com.interview.prep.services.UserService;
 import com.interview.prep.utility.AddressType;
+import com.interview.prep.utility.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setName(userRecord.name());
         user.setPhoneNumber(userRecord.phoneNumber());
-        user.setPassword(userRecord.password());
+        user.setPassword(PasswordUtil.hashPassword(userRecord.password()));
         user.setRoles(userRecord.roles());
 
         try {
@@ -134,7 +135,7 @@ public class UserServiceImpl implements UserService {
             Optional<User> user = userRepository.findById(id);
             user.get().setName(userRecord.name());
             user.get().setPhoneNumber(userRecord.phoneNumber());
-            user.get().setPassword(userRecord.password());
+            user.get().setPassword(PasswordUtil.hashPassword(userRecord.password()));
 
             try {
                 user.get().setAddress(userRecord.
@@ -183,7 +184,7 @@ public class UserServiceImpl implements UserService {
         else{
             Optional<User> user = userRepository.findByName(userRecord.name());
             user.get().setPhoneNumber(userRecord.phoneNumber());
-            user.get().setPassword(userRecord.password());
+            user.get().setPassword(PasswordUtil.hashPassword(userRecord.password()));
 
             try {
                 user.get().setAddress(userRecord.

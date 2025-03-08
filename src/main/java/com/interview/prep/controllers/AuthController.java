@@ -1,7 +1,9 @@
 package com.interview.prep.controllers;
 
 
+import com.interview.prep.records.UserRecord;
 import com.interview.prep.security.utility.JwtUtil;
+import com.interview.prep.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,12 +24,17 @@ public class AuthController {
     private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
 
+    private final UserService userService;
+
+
     public AuthController(JwtUtil jwtUtil,
                           AuthenticationManager authenticationManager,
-                          UserDetailsService userDetailsService){
+                          UserDetailsService userDetailsService
+                          ,UserService userService){
         this.authenticationManager = authenticationManager;
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
+        this.userService = userService;
     }
 
     @PostMapping("/login")
@@ -41,6 +48,12 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of("token",token));
 
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity addUser(@RequestBody UserRecord user){
+        userService.createUser(user);
+        return ResponseEntity.ok("User Creation Successfull");
     }
 
 }

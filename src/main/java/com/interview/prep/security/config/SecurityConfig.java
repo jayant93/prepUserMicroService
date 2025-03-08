@@ -46,8 +46,7 @@ public class SecurityConfig {
         httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/user/add").permitAll() // Open authentication endpoints
+                        .requestMatchers("/auth/**").permitAll()// Open authentication endpoints
                         .requestMatchers("/user/**").authenticated() // Secure user endpoints
                         .anyRequest().authenticated()
                 )
