@@ -4,6 +4,8 @@ package com.interview.prep.entities;
 import com.interview.prep.utility.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import java.util.List;
 import java.util.Set;
@@ -22,6 +24,7 @@ public class User {
     private String password;
 
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL,orphanRemoval = true)
+    @Fetch(FetchMode.SUBSELECT)
     private List<Address> address;
 
     private String phoneNumber;
@@ -31,6 +34,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Set<Role> roles;
+
+    public Long getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
